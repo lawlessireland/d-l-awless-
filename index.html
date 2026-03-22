@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>D_{L}@WLESS — Welcome</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink: #0a0808;
+  --ink2: #140f0f;
+  --ink3: #1e1414;
+  --red: #e83030;
+  --red2: #ff5050;
+  --red-dim: #7a1010;
+  --red-glow: rgba(232,48,48,0.55);
+  --red-soft: rgba(232,48,48,0.12);
+  --cyan: #00c8ff;
+  --cyan-dim: #005a72;
+  --cyan-glow: rgba(0,200,255,0.35);
+  --cyan-soft: rgba(0,200,255,0.10);
+  --cream: #f0e0e0;
+  --txt: #e8d0d0;
+  --txt2: #a88880;
+  --txt3: #6a5050;
+  --border: #2e1e1e;
+  --green: #4ec994;
+  --coral: #e05c40;
+  --rose: #c4506a;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--txt);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── NOISE + ATMOSPHERE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(232,48,48,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 100%, var(--cyan-soft) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 35% at 70% 15%, rgba(0,200,255,0.04) 0%, transparent 60%);
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--red-dim); border-radius: 2px; }
+
+/* ── LAYOUT ── */
+.page { position: relative; z-index: 1; }
+
+section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 60px 28px;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.25;
+  pointer-events: none;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+.hero-glow.red { background: var(--red); top: -100px; left: -80px; }
+.hero-glow.cyan { background: var(--cyan); bottom: -120px; right: -100px; animation-delay: -6s; }
+@keyframes drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 30px) scale(1.15); }
+}
+
+.hero-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  background: var(--cyan-soft);
+  border: 1px solid var(--cyan-dim);
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 32px;
+  display: inline-block;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  animation: fadeUp 0.8s ease 0.15s both;
+}
+.hero h1 .num {
+  display: block;
+  font-size: clamp(5rem, 14vw, 12rem);
+  font-weight: 800;
+  color: var(--red);
+  text-shadow: 0 0 60px var(--red-glow), 0 0 120px rgba(232,48,48,0.15);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+
+.hero-sub {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  color: var(--txt2);
+  max-width: 520px;
+  line-height: 1.5;
+  margin: 24px auto 40px;
+  animation: fadeUp 0.8s ease 0.45s both;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 6px;
+  background: var(--red);
+  color: var(--ink);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 0 0 var(--red-glow), 0 4px 20px rgba(232,48,48,0.3);
+  animation: fadeUp 0.8s ease 0.6s both;
+}
+.hero-cta:hover {
+  background: var(--red2);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 8px var(--red-soft), 0 8px 30px var(--red-glow);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--txt3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: fadeUp 0.8s ease 0.9s both, bobble 2s ease-in-out infinite 1.7s;
+}
+.scroll-hint::after {
+  content: '↓';
+  display: block;
+  text-align: center;
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+@keyframes bobble { 0%,100%{ transform: translateX(-50%) translateY(0); } 50%{ transform: translateX(-50%) translateY(6px); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  max-width: 900px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent 0%, var(--red-dim) 30%, var(--cyan-dim) 70%, transparent 100%);
+}
+
+/* ── STORY SECTION ── */
+.story {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.story-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+
+.story h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 32px;
+  max-width: 600px;
+}
+.story h2 em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--cyan);
+  font-weight: 400;
+}
+
+.story-body {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  line-height: 2;
+  color: var(--txt2);
+  max-width: 640px;
+}
+.story-body p { margin-bottom: 24px; }
+.story-body strong { color: var(--cream); font-weight: 500; }
+.story-body .highlight {
+  color: var(--red2);
+  font-weight: 500;
+}
+.story-body .cyan-hl {
+  color: var(--cyan);
+  font-weight: 500;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  padding: 80px 28px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.timeline-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 40px;
+}
+
+.tl-grid {
+  display: grid;
+  grid-template-columns: 80px 1px 1fr;
+  gap: 0 28px;
+}
+.tl-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--red);
+  font-weight: 500;
+  padding-top: 4px;
+  text-align: right;
+}
+.tl-line {
+  background: linear-gradient(180deg, var(--red-dim), var(--cyan-dim));
+  position: relative;
+}
+.tl-dot {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 10px var(--red-glow);
+}
+.tl-card {
+  padding-bottom: 48px;
+}
+.tl-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+.tl-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  line-height: 1.9;
+  color: var(--txt2);
+}
+
+/* ── WHAT IS THIS SECTION ── */
+.what {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.what h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.what h2 em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--red2);
+  font-weight: 400;
+}
+.what-intro {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  line-height: 2;
+  color: var(--txt2);
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.feature-card {
+  background: rgba(20,10,10,0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(232,48,48,0.12);
+  border-radius: 10px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232,48,48,0.25) 40%, var(--cyan-soft) 80%, transparent);
+}
+.feature-card:hover {
+  border-color: var(--red-dim);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 20px var(--red-soft);
+}
+.feature-icon {
+  font-size: 1.6rem;
+  margin-bottom: 14px;
+  display: block;
+}
+.feature-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.feature-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  line-height: 1.8;
+  color: var(--txt2);
+}
+
+/* ── LEARN SECTION ── */
+.learn {
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+.learn-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+.learn h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 32px;
+  max-width: 600px;
+}
+.learn h2 em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--green);
+  font-weight: 400;
+}
+
+.learn-steps {
+  display: grid;
+  gap: 24px;
+  counter-reset: steps;
+  max-width: 640px;
+}
+.learn-step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 18px;
+  counter-increment: steps;
+}
+.learn-step-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--ink2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--red);
+  flex-shrink: 0;
+}
+.learn-step-content h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+.learn-step-content p {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  line-height: 1.8;
+  color: var(--txt2);
+}
+
+/* ── CHORD EXPLAINER ── */
+.chord-demo {
+  margin: 60px 0;
+  background: var(--ink2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.chord-demo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red-dim) 30%, var(--cyan-dim) 70%, transparent);
+}
+.chord-demo-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: 16px;
+}
+.chord-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.chord-pill {
+  padding: 10px 22px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: var(--ink);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--txt3);
+  font-weight: 500;
+  transition: all 0.3s;
+}
+.chord-pill.active {
+  border-color: var(--red);
+  color: var(--red);
+  background: var(--red-soft);
+  box-shadow: 0 0 14px var(--red-soft);
+}
+.chord-explain {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  line-height: 1.9;
+  color: var(--txt2);
+}
+.chord-explain strong { color: var(--cream); font-weight: 500; }
+
+/* ── FINAL CTA ── */
+.final-cta {
+  padding: 100px 28px 120px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.final-cta h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.final-cta p {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: var(--txt2);
+  max-width: 480px;
+  margin: 0 auto 36px;
+}
+.final-cta .hero-cta { animation: none; }
+
+/* ── DEDICATION ── */
+.dedication {
+  padding: 100px 28px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.dedication-inner {
+  background: linear-gradient(160deg, var(--ink2) 0%, rgba(20,15,15,0.8) 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.dedication-inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red) 25%, var(--cyan) 75%, transparent);
+}
+.dedication-inner::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ded-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 24px;
+}
+.ded-name {
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.ded-handle {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--red);
+  margin-bottom: 28px;
+  display: inline-block;
+}
+.ded-handle a {
+  color: var(--red);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ded-handle a:hover { color: var(--red2); }
+.ded-body {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  line-height: 2;
+  color: var(--txt2);
+  max-width: 580px;
+}
+.ded-body p { margin-bottom: 20px; }
+.ded-body strong { color: var(--cream); font-weight: 500; }
+.ded-body .hl-cyan { color: var(--cyan); font-weight: 500; }
+.ded-body .hl-red { color: var(--red2); font-weight: 500; }
+.ded-body .hl-green { color: var(--green); font-weight: 500; }
+
+.ded-gift {
+  margin-top: 32px;
+  padding: 24px 28px;
+  background: var(--ink);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--cyan);
+  border-radius: 0 8px 8px 0;
+  position: relative;
+}
+.ded-gift-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--txt3);
+  margin-bottom: 10px;
+}
+.ded-gift-text {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  line-height: 1.7;
+  color: var(--cream);
+}
+.ded-gift-text .baby-name {
+  color: var(--cyan);
+  font-weight: 400;
+}
+.ded-gift-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--txt3);
+  margin-top: 12px;
+}
+
+.ded-collab {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  line-height: 1.9;
+  color: var(--txt3);
+}
+.ded-collab strong { color: var(--txt2); font-weight: 500; }
+
+@media (max-width: 640px) {
+  .dedication { padding: 60px 20px; }
+  .dedication-inner { padding: 28px 22px; }
+  .ded-gift { padding: 18px 20px; }
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 28px;
+  text-align: center;
+}
+footer p {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--txt3);
+  letter-spacing: 0.1em;
+  line-height: 2;
+}
+footer a {
+  color: var(--red);
+  text-decoration: none;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .hero { padding: 40px 20px; }
+  .hero h1 .num { font-size: 4.5rem; }
+  section { padding-left: 20px; padding-right: 20px; }
+  .tl-grid { grid-template-columns: 56px 1px 1fr; gap: 0 16px; }
+  .tl-year { font-size: 0.62rem; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .chord-demo { padding: 20px; }
+  .chord-pill { padding: 8px 16px; font-size: 0.78rem; }
+}
+
+/* ── ANIMATE ON SCROLL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-glow red"></div>
+  <div class="hero-glow cyan"></div>
+  <div class="hero-badge">D_{L}@WLESS v3.03 — March 3, 2026</div>
+  <h1>
+    The Machine That<br/>Changed Music
+    <span class="num">303</span>
+  </h1>
+  <p class="hero-sub">
+    A love letter to the Roland TB-303 — and a free instrument
+    that lets you build real sequences while learning music theory,
+    no experience needed.
+  </p>
+  <a href="D_L_WLESS-v3_03.html" class="hero-cta">▶ Launch the Studio</a>
+  <div class="scroll-hint">Scroll to learn more</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ STORY ═══════════════════════════════════════ -->
+<section class="story reveal">
+  <div class="story-label">The Accidental Revolution</div>
+  <h2>A box nobody wanted became the sound <em>everyone</em> chased</h2>
+  <div class="story-body">
+    <p>
+      In <strong>1981</strong>, Roland released the TB-303 Bass Line synthesizer.
+      It was supposed to help solo guitarists practice — a little silver box that
+      played automatic bass lines so you didn't need a real bassist in the room.
+    </p>
+    <p>
+      <span class="highlight">It flopped.</span> Musicians hated how fake it sounded.
+      Roland discontinued it after just 18 months. You could find them in pawn shops
+      for $50.
+    </p>
+    <p>
+      Then something magical happened. A group of kids in <strong>Chicago</strong> —
+      DJ Pierre, Spanky, and Herb J, together known as Phuture — started
+      <span class="cyan-hl">twisting the knobs the "wrong" way</span>. They cranked
+      the resonance, swept the cutoff filter, and fed the sequencer patterns
+      that were never intended.
+    </p>
+    <p>
+      The sound that came out was unlike anything anyone had heard before.
+      A <strong>squelching, screaming, hypnotic growl</strong> that seemed alive.
+      They recorded a 12-minute track called <span class="highlight">"Acid Tracks"</span>
+      and gave it to DJ Ron Hardy, who played it four times in a row at the
+      Music Box club.
+    </p>
+    <p>
+      <strong>Acid house was born.</strong> From there, the 303 sound spread
+      to <span class="cyan-hl">Detroit techno</span>, <span class="cyan-hl">UK rave</span>,
+      <span class="cyan-hl">Berlin clubs</span>, and eventually every corner of
+      electronic music. That $50 pawn shop box now sells for $5,000+.
+    </p>
+    <p>
+      The lesson? <strong>The best sounds come from experimentation</strong> —
+      from turning knobs and asking "what happens if I do this?"
+      That's exactly what this studio is built for.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ TIMELINE ═══════════════════════════════════════ -->
+<div class="timeline reveal">
+  <div class="timeline-label">The 303 Timeline</div>
+  <div class="tl-grid">
+
+    <div class="tl-year">1981</div>
+    <div class="tl-line"><div class="tl-dot"></div></div>
+    <div class="tl-card">
+      <div class="tl-title">Roland releases the TB-303</div>
+      <div class="tl-text">Designed as a bass practice tool for guitarists. Original price: $395. Sales are disappointing — it sounds too synthetic, nothing like a real bass.</div>
+    </div>
+
+    <div class="tl-year">1984</div>
+    <div class="tl-line"><div class="tl-dot"></div></div>
+    <div class="tl-card">
+      <div class="tl-title">Discontinued — nobody wants it</div>
+      <div class="tl-text">Roland pulls the plug after ~10,000 units. The 303 piles up in second-hand bins. A failed product — or so everyone thinks.</div>
+    </div>
+
+    <div class="tl-year">1987</div>
+    <div class="tl-line"><div class="tl-dot" style="background:var(--coral);box-shadow:0 0 10px rgba(224,92,64,0.5);"></div></div>
+    <div class="tl-card">
+      <div class="tl-title">Phuture records "Acid Tracks"</div>
+      <div class="tl-text">DJ Pierre discovers the squelch by accident. The track becomes the blueprint for acid house. Chicago explodes. Music is changed forever.</div>
+    </div>
+
+    <div class="tl-year">1988</div>
+    <div class="tl-line"><div class="tl-dot"></div></div>
+    <div class="tl-card">
+      <div class="tl-title">The Second Summer of Love</div>
+      <div class="tl-text">Acid house crosses the Atlantic to the UK. Warehouse raves, smiley faces, and the 303 sound define an entire generation's youth culture.</div>
+    </div>
+
+    <div class="tl-year">1990s</div>
+    <div class="tl-line"><div class="tl-dot" style="background:var(--cyan);box-shadow:0 0 10px var(--cyan-glow);"></div></div>
+    <div class="tl-card">
+      <div class="tl-title">Global spread — Berlin, Detroit, beyond</div>
+      <div class="tl-text">The 303 sound becomes foundational in Berlin techno, Detroit's second wave, trance, jungle, and drum & bass. Prices start climbing.</div>
+    </div>
+
+    <div class="tl-year">Now</div>
+    <div class="tl-line"><div class="tl-dot" style="background:var(--green);box-shadow:0 0 10px rgba(78,201,148,0.5);"></div></div>
+    <div class="tl-card">
+      <div class="tl-title">You don't need $5,000 hardware</div>
+      <div class="tl-text">D_{L}@WLESS puts the same synthesis engine in your browser — for free. Real subtractive synthesis. Real sequencing. Real music theory. Zero cost.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ WHAT IS THIS ═══════════════════════════════════════ -->
+<section class="what reveal">
+  <div class="story-label">So What Is This, Exactly?</div>
+  <h2>Your browser is now <em>a synth studio</em></h2>
+  <p class="what-intro">
+    D_{L}@WLESS is a free music-making tool that runs entirely in your web browser.
+    No downloads, no accounts, no experience needed. It gives you the same type of
+    sound engine found in hardware synths — and teaches you music theory along the way.
+  </p>
+  <div class="feature-grid">
+
+    <div class="feature-card">
+      <span class="feature-icon">🎹</span>
+      <div class="feature-title">Pick a Sound</div>
+      <div class="feature-text">Choose from 16 patches inspired by real artists — from acid squelch to deep Detroit soul to UK rave stabs. Each one sets up the synth engine for you automatically.</div>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🎵</span>
+      <div class="feature-title">Learn Chord Progressions</div>
+      <div class="feature-text">8 real progressions used in techno, house, and dance music — with plain-English explanations of why each chord creates a certain mood. Learn by listening.</div>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🥁</span>
+      <div class="feature-title">Build Drum Patterns</div>
+      <div class="feature-text">Click squares on a grid to place kick drums, snares, and hi-hats. Hear them instantly. It's like a drum machine from the 80s — but in your browser.</div>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🎛️</span>
+      <div class="feature-title">Twist the Knobs</div>
+      <div class="feature-text">Drag rotary knobs to shape the sound — just like the original 303. Filter cutoff, resonance, attack, decay. The same controls the pros use, explained in plain language.</div>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">🔊</span>
+      <div class="feature-title">Add Effects</div>
+      <div class="feature-text">Echo (delay) and room sound (reverb) — synced to your tempo. Turn them on, hear the difference. Simple sliders, real studio effects.</div>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">📚</span>
+      <div class="feature-title">Learn As You Go</div>
+      <div class="feature-text">Every control has a tooltip explaining what it does. A built-in terminology guide covers oscillators, filters, envelopes, and more — in words anyone can understand.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ LEARN ═══════════════════════════════════════ -->
+<section class="learn reveal">
+  <div class="learn-label">Music Theory — The Fun Way</div>
+  <h2>You'll learn real theory<br/>without <em>realising it</em></h2>
+
+  <div class="learn-steps">
+    <div class="learn-step">
+      <div class="learn-step-num">1</div>
+      <div class="learn-step-content">
+        <h3>What's a chord progression?</h3>
+        <p>It's just a sequence of chords that repeat — like the backbone of a song. Think of it as the emotional roadmap. A "minor" progression sounds dark and serious. A "major" one sounds bright and happy. The app shows you 8 real ones used in actual dance music, and explains why each one creates a different vibe.</p>
+      </div>
+    </div>
+    <div class="learn-step">
+      <div class="learn-step-num">2</div>
+      <div class="learn-step-content">
+        <h3>What's a sequencer?</h3>
+        <p>Imagine a grid of squares. Each column is a moment in time. Each row is a different sound. Click a square and that sound plays at that moment. When it reaches the end, it loops back to the start. That's it — that's a sequencer. The 303 used exactly this concept in 1981, and it still works beautifully today.</p>
+      </div>
+    </div>
+    <div class="learn-step">
+      <div class="learn-step-num">3</div>
+      <div class="learn-step-content">
+        <h3>What's a filter?</h3>
+        <p>Every sound is made up of frequencies — low rumbles, mid tones, and high sparkle. A filter removes some of those frequencies. Turn the cutoff knob down and the sound gets dark and muffled. Turn it up and it gets bright and cutting. Crank the resonance and it starts to scream — that's the classic acid sound.</p>
+      </div>
+    </div>
+    <div class="learn-step">
+      <div class="learn-step-num">4</div>
+      <div class="learn-step-content">
+        <h3>What's an envelope?</h3>
+        <p>An envelope describes how a sound changes over time. Imagine plucking a guitar string — it's loud at first (attack), drops quickly (decay), rings for a while (sustain), then fades out (release). Those four stages — ADSR — shape every note in this synth. Short decay = punchy. Long release = dreamy.</p>
+      </div>
+    </div>
+    <div class="learn-step">
+      <div class="learn-step-num">5</div>
+      <div class="learn-step-content">
+        <h3>What's BPM?</h3>
+        <p>Beats Per Minute — how fast the music goes. 120 BPM is a steady walking pace, perfect for house music. 140 BPM is running pace — that's hard techno territory. The app lets you dial in any speed from 60 to 200 and everything stays in sync automatically.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chord demo -->
+  <div class="chord-demo">
+    <div class="chord-demo-label">Example — How a progression creates mood</div>
+    <div class="chord-pills" id="chord-demo-pills">
+      <div class="chord-pill active">Dm</div>
+      <div class="chord-pill">Bb</div>
+      <div class="chord-pill">F</div>
+      <div class="chord-pill">C</div>
+    </div>
+    <div class="chord-explain">
+      This is the <strong>Dm–Bb–F–C</strong> progression in D minor — the most common progression in dark techno. <strong>Dm</strong> anchors you with tension. <strong>Bb</strong> adds weight and sadness. <strong>F</strong> lifts briefly, like a gasp of air. <strong>C</strong> pulls you back down. It loops endlessly and creates that hypnotic, bottomless feeling you hear in clubs at 3am. In the app, you can load this progression with one click and hear how it sounds under different synth patches.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ FINAL CTA ═══════════════════════════════════════ -->
+<div class="final-cta reveal">
+  <h2>Ready to make<br/>some noise?</h2>
+  <p>
+    No installs. No sign-up. No cost. Just open the studio in your browser, pick a sound, and start experimenting — exactly like the people who discovered acid house by turning knobs they weren't supposed to.
+  </p>
+  <a href="D_L_WLESS-v3_03.html" class="hero-cta">▶ Launch D_{L}@WLESS</a>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ DEDICATION ═══════════════════════════════════════ -->
+<div class="dedication reveal">
+  <div class="dedication-inner">
+    <div class="ded-label">Created By</div>
+    <div class="ded-name">Neville Lawless</div>
+    <div class="ded-handle"><a href="https://instagram.com/lawless_Sounds" target="_blank" rel="noopener">@lawless_Sounds</a></div>
+
+    <div class="ded-body">
+      <p>
+        I built this project to <strong>teach myself</strong>. I've spent years around synths, drum machines, and turntables — I know what sounds right and what a good groove feels like. But I wanted to go deeper. I wanted to understand <span class="hl-cyan">why</span> a minor chord sounds dark, <span class="hl-cyan">why</span> a filter sweep makes people move, <span class="hl-cyan">why</span> certain drum patterns carry more weight than others.
+      </p>
+      <p>
+        D_{L}@WLESS was crafted as a way to <strong>convert practical music knowledge into a broader understanding</strong> — to bridge the gap between knowing something works because you've heard it a thousand times, and knowing <span class="hl-red">why it works</span> at the level of notes, frequencies, and theory.
+      </p>
+      <p>
+        The coding was done primarily by <span class="hl-cyan">Claude</span> (Anthropic's AI), working from my direction, my design vision, and my music knowledge. I described the sounds I wanted, the workflows that make sense on a stage, the aesthetic of a dark room at 3am — and Claude translated that into 3,685 lines of working code. A human ear and an AI mind, building something neither could have made alone.
+      </p>
+    </div>
+
+    <div class="ded-gift">
+      <div class="ded-gift-label">A Gift</div>
+      <div class="ded-gift-text">
+        This was meant to be finished for <span class="baby-name">Brendan</span>'s due date — March 3rd, 2026. A little piece of his dad's world, waiting for him on the day he arrived.
+      </div>
+      <div class="ded-gift-text" style="margin-top: 14px;">
+        But <span class="baby-name">Brendan</span> had his own schedule. He's already here — three weeks early, safe and sound, and in my arms as I write this.
+      </div>
+      <div class="ded-gift-date">
+        The version number is 3.03 — for 3/03. His day.<br/>
+        The music can wait. He can't.
+      </div>
+    </div>
+
+    <div class="ded-collab">
+      <strong>Creator & direction:</strong> Neville Lawless<br/>
+      <strong>Code & synthesis engine:</strong> Claude (Anthropic)<br/>
+      <strong>For:</strong> Brendan — welcome to the world, little man.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
+<footer>
+  <p>
+    D_{L}@WLESS v3.03 — <a href="D_L_WLESS-v3_03.html">Hardware Synth Studio</a><br/>
+    Created by Neville Lawless · <a href="https://instagram.com/lawless_Sounds" target="_blank" rel="noopener">@lawless_Sounds</a> · Code by Claude (Anthropic)<br/>
+    Single HTML file · Zero dependencies · 100% free<br/>
+    For Brendan · March 3, 2026
+  </p>
+</footer>
+
+</div><!-- /page -->
+
+<script>
+// ── Scroll reveal ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+// ── Chord pill animation ──
+const pills = document.querySelectorAll('#chord-demo-pills .chord-pill');
+let activeIdx = 0;
+setInterval(() => {
+  pills[activeIdx].classList.remove('active');
+  activeIdx = (activeIdx + 1) % pills.length;
+  pills[activeIdx].classList.add('active');
+}, 2000);
+</script>
+
+</body>
+</html>
